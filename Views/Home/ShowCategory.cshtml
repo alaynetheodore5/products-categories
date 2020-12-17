@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "View Product";
+}
+
+@model Category
+
+<div class="jumbotron">
+    <h1>@ViewBag.Category.CategoryName</h1>
+    <h3>Products:</h3>
+    <ul>
+        @foreach(Association c in @Model.Associations)
+        {
+            <li>@c.Product.ProductName</li>
+        }
+    </ul>
+
+    <div class="card">
+        <form action="/joinprod" method="post">
+        <input type="hidden" name="CategoryId" value="@Model.CategoryId">
+                <legend>Add Category to this Product:</legend>
+                <div class="form-group">
+                    <select name="ProductID" class="form-control">
+                        @foreach(Product p in ViewBag.ProdNotCat)
+                        {
+                            <option value="@p.ProductId">@p.ProductName</option>
+                        }
+                    </select>
+                </div>
+                <input type="submit" value="Add" class="btn btn-success">
+        </form>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Products Page";
+}
+
+@model Product 
+
+<div class="jumbotron">
+    <header>
+        <h1 class="display-4 text-center">Products | <a href="/categories">Categories</a></h1>
+    </header>
+
+    <div class="card col-sm-6">
+        <legend>New Product:</legend>
+        <form action="/addproduct" method="post">
+            <div class="form-group">
+                <label asp-for="ProductName">Product Name:</label>
+                <input asp-for="ProductName" class="form-control">
+                <span class="text-danger" asp-validation-for="ProductName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">Description:</label>
+                <input asp-for="Description" class="form-control">
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price">Price:</label>
+                <input asp-for="Price" class="form-control">
+                <span class="text-danger" asp-validation-for="Price"></span>
+            </div>
+            <input type="submit" value="Add Product" class="btn btn-info">
+        </form>
+    </div>
+
+    <div class="col-sm-3">
+        <legend>Existing Products:</legend>
+        <table class="table table-striped">
+            <tr>
+                <th>Product</th>
+            </tr>
+            @foreach(var p in ViewBag.Product)
+            {
+                <tr>
+                    <td><a href="/products/@p.ProductId">@p.ProductName</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+</div>
